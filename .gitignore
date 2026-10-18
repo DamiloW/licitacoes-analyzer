@@ -1,0 +1,21 @@
+# Maven
+target/
+
+# Ambient
+.env
+.env.*
+!.env.example
+
+#VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
