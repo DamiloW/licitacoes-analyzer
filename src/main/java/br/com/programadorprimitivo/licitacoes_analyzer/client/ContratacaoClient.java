@@ -3,6 +3,8 @@ package br.com.programadorprimitivo.licitacoes_analyzer.client;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import br.com.programadorprimitivo.licitacoes_analyzer.dto.PaginaContratacoesDTO;
+
 @Component
 public class ContratacaoClient {
 
@@ -14,7 +16,7 @@ public class ContratacaoClient {
                 .build();
     }
 
-    public String buscarContratacoes() {
+    public PaginaContratacoesDTO buscarContratacoes() {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/v1/contratacoes/publicacao")
@@ -25,7 +27,7 @@ public class ContratacaoClient {
                         .queryParam("tamanhoPagina", 10)
                         .build())
                 .retrieve()
-                .body(String.class);
+                .body(PaginaContratacoesDTO.class);
     }
 
 }
