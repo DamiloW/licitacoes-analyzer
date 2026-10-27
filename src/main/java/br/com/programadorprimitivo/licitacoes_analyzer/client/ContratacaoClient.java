@@ -16,14 +16,14 @@ public class ContratacaoClient {
                 .build();
     }
 
-    public PaginaContratacoesDTO buscarContratacoes() {
+    public PaginaContratacoesDTO buscarContratacoes(int pagina) {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/v1/contratacoes/publicacao")
                         .queryParam("dataInicial", "20261013")
                         .queryParam("dataFinal", "20261019")
                         .queryParam("codigoModalidadeContratacao", 6)
-                        .queryParam("pagina", 1)
+                        .queryParam("pagina", pagina)
                         .queryParam("tamanhoPagina", 10)
                         .build())
                 .retrieve()

@@ -26,17 +26,19 @@ public class ContratacaoController {
     }
 
     @GetMapping("/api/contratacoes")
-    public PaginaContratacoesDTO listaContratacoes() {
-        return contratacaoClient.buscarContratacoes();
+    public PaginaContratacoesDTO listaContratacoes(
+            @RequestParam(defaultValue = "1") int pagina) {
+
+        return contratacaoClient.buscarContratacoes(pagina);
     }
 
     @GetMapping("/api/contratacoes/buscar")
     public List<ContratacaoDTO> buscarPorObjeto(
-            @RequestParam String palavra) {
+            @RequestParam String palavra,
+            @RequestParam(defaultValue = "1") int pagina) {
 
-        PaginaContratacoesDTO pagina = contratacaoClient.buscarContratacoes();
+        PaginaContratacoesDTO resultado = contratacaoClient.buscarContratacoes(pagina);
 
-        return contratacaoService.filtrarPorObjeto(
-                pagina.data(), palavra);
+        return contratacaoService.filtrarPorObjeto(resultado.data(), palavra);
     }
 }
