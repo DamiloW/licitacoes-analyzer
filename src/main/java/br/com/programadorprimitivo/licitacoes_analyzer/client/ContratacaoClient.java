@@ -1,5 +1,8 @@
 package br.com.programadorprimitivo.licitacoes_analyzer.client;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -16,12 +19,18 @@ public class ContratacaoClient {
                 .build();
     }
 
-    public PaginaContratacoesDTO buscarContratacoes(int pagina) {
+    public PaginaContratacoesDTO buscarContratacoes(
+            int pagina,
+            LocalDate dataInicial,
+            LocalDate dataFinal) {
+
+        DateTimeFormatter formato = DateTimeFormatter.BASIC_ISO_DATE;
+
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/v1/contratacoes/publicacao")
-                        .queryParam("dataInicial", "20261013")
-                        .queryParam("dataFinal", "20261019")
+                        .queryParam("dataInicial", dataInicial.format(formato))
+                        .queryParam("dataFinal", dataFinal.format(formato))
                         .queryParam("codigoModalidadeContratacao", 6)
                         .queryParam("pagina", pagina)
                         .queryParam("tamanhoPagina", 10)
